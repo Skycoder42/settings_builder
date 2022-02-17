@@ -2,7 +2,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/test.dart';
 
-import 'model/simple_default.dart';
+import 'models/simple_default.dart';
 import 'test_helpers.dart';
 
 class MockSharedPreferences extends Mock implements SharedPreferences {}
