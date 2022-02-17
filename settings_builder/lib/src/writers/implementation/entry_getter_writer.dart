@@ -17,12 +17,12 @@ class EntryGetterWriter implements Writer {
 
   final PropertyAccessorElement getter;
   final SettingsEntryReader settingsEntry;
-  final String getterKeyName;
+  final String entryKeyName;
 
   const EntryGetterWriter({
     required this.getter,
     required this.settingsEntry,
-    required this.getterKeyName,
+    required this.entryKeyName,
   });
 
   @override
@@ -178,6 +178,6 @@ class EntryGetterWriter implements Writer {
       );
     }
 
-    buffer.write('$getterKeyName)');
+    buffer.write('$entryKeyName)');
   }
 }

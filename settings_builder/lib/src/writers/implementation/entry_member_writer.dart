@@ -11,6 +11,7 @@ import '../../extensions.dart';
 import '../mixin/mixin_writer.dart';
 import '../writer.dart';
 import 'entry_getter_writer.dart';
+import 'entry_setter_writer.dart';
 import 'implementation_writer.dart';
 
 @internal
@@ -18,8 +19,8 @@ class EntryMemberWriter implements Writer {
   final PropertyAccessorElement getter;
   final SettingsGroupReader settingsGroup;
 
-  String get getterKeyName => '${getter.name}Key';
-  String get hasGetterName => 'has${getter.name.pascal}';
+  String get entryKeyName => '${getter.name}Key';
+  String get hasEntryName => 'has${getter.name.pascal}';
 
   EntryMemberWriter({
     required this.getter,
@@ -33,12 +34,21 @@ class EntryMemberWriter implements Writer {
     );
 
     _writeKey(buffer, settingsEntry);
+    buffer.writeln();
     _writeHasValue(buffer, settingsEntry);
+    buffer.writeln();
     EntryGetterWriter(
       getter: getter,
       settingsEntry: settingsEntry,
-      getterKeyName: getterKeyName,
+      entryKeyName: entryKeyName,
     )(buffer);
+    buffer.writeln();
+    EntrySetterWriter(
+      getter: getter,
+      settingsEntry: settingsEntry,
+      entryKeyName: entryKeyName,
+    )(buffer);
+    buffer.writeln();
   }
 
   void _writeKey(StringBuffer buffer, SettingsEntryReader settingsEntry) {
@@ -46,7 +56,7 @@ class EntryMemberWriter implements Writer {
 
     buffer
       ..writeln('@override')
-      ..write('late final $getterKeyName = ');
+      ..write('late final $entryKeyName = ');
 
     if (settingsGroup.root) {
       buffer.writeln(
@@ -57,17 +67,14 @@ class EntryMemberWriter implements Writer {
     } else {
       buffer.writeln("'\$${MixinWriter.groupKeyName}.$entryKey';");
     }
-
-    buffer.writeln();
   }
 
   void _writeHasValue(StringBuffer buffer, SettingsEntryReader settingsEntry) {
     buffer
       ..writeln('@override')
       ..writeln(
-        'bool get $hasGetterName => '
-        '${ImplementationWriter.spKey}.containsKey($getterKeyName);',
-      )
-      ..writeln();
+        'bool get $hasEntryName => '
+        '${ImplementationWriter.spKey}.containsKey($entryKeyName);',
+      );
   }
 }
