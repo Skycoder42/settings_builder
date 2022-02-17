@@ -1,0 +1,12 @@
+name: settings_annotation
+description: Annotations for the settings_builder package.
+version: 1.0.0
+
+environment:
+  sdk: ">=2.16.0 <3.0.0"
+
+dependencies:
+  meta: ^1.7.0
+
+dev_dependencies:
+  lint: ^1.8.2

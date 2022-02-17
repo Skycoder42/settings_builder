@@ -1,6 +1,6 @@
 builders:
   settings_builder:
-    import: "package:settings_builder/builder.dart"
+    import: "package:settings_builder/settings_builder.dart"
     builder_factories: ["settingsBuilder"]
     build_extensions: { ".dart": ["settings.g.part"] }
     auto_apply: dependents
