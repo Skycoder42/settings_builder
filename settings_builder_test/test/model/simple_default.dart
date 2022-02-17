@@ -11,11 +11,11 @@ enum SimpleDefaultEnum {
 
 @SettingsGroup(root: true)
 abstract class SimpleDefault with _$SimpleDefault {
-  factory SimpleDefault(SharedPreferences sharedPreferences) =
+  factory SimpleDefault(SharedPreferences sharedPreferences, [String? prefix]) =
       _$SimpleDefaultImpl;
 
-  static Future<SimpleDefault> getInstance() =>
-      _$SimpleDefaultImpl.getInstance();
+  static Future<SimpleDefault> getInstance([String? prefix]) =>
+      _$SimpleDefaultImpl.getInstance(prefix);
 
   @SettingsEntry(defaultValue: true)
   bool get boolValue;
