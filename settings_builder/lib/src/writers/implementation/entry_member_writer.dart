@@ -49,6 +49,8 @@ class EntryMemberWriter implements Writer {
       entryKeyName: entryKeyName,
     )(buffer);
     buffer.writeln();
+    _writeRemove(buffer);
+    buffer.writeln();
   }
 
   void _writeKey(StringBuffer buffer, SettingsEntryReader settingsEntry) {
@@ -69,12 +71,18 @@ class EntryMemberWriter implements Writer {
     }
   }
 
-  void _writeHasValue(StringBuffer buffer, SettingsEntryReader settingsEntry) {
-    buffer
-      ..writeln('@override')
-      ..writeln(
-        'bool get $hasEntryName => '
-        '${ImplementationWriter.spKey}.containsKey($entryKeyName);',
-      );
-  }
+  void _writeHasValue(StringBuffer buffer, SettingsEntryReader settingsEntry) =>
+      buffer
+        ..writeln('@override')
+        ..writeln(
+          'bool get $hasEntryName => '
+          '${ImplementationWriter.spKey}.containsKey($entryKeyName);',
+        );
+
+  void _writeRemove(StringBuffer buffer) => buffer
+    ..writeln('@override')
+    ..writeln(
+      'Future<bool> remove${getter.name.pascal}() => '
+      '${ImplementationWriter.spKey}.remove($entryKeyName);',
+    );
 }
