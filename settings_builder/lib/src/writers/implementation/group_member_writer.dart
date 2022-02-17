@@ -35,7 +35,7 @@ class GroupMemberWriter implements Writer {
     }
 
     final settingsEntry = SettingsEntryReader(
-      getter.getAnnotation<SettingsEntry>(),
+      getter.getAnnotation(const TypeChecker.fromRuntime(SettingsEntry)),
     );
 
     _writeGetter(buffer, settingsEntry);

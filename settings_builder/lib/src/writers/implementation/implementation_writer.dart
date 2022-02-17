@@ -3,6 +3,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:meta/meta.dart';
 import 'package:settings_annotation/settings_annotation.dart';
+import 'package:source_gen/source_gen.dart';
 
 import '../../annotation_readers/settings_group_reader.dart';
 import '../../extensions.dart';
@@ -35,8 +36,8 @@ class ImplementationWriter implements Writer {
     _writeCommon(buffer);
 
     for (final getter in clazz.abstractGetters) {
-      final getterSettingsGroup =
-          getter.returnType.getAnnotation<SettingsGroup>();
+      final getterSettingsGroup = getter.returnType
+          .getAnnotation(const TypeChecker.fromRuntime(SettingsGroup));
       if (getterSettingsGroup.isNull) {
         EntryMemberWriter(
           getter: getter,
@@ -73,7 +74,7 @@ class ImplementationWriter implements Writer {
     ..writeln('$implementationName(this.$spKey, [this.$prefixKey]);')
     ..writeln()
     ..writeln(
-      'static Future<$implementationName> '
+      'static Future<${clazz.name}> '
       'getInstance([String? $prefixKey]) async => '
       '$implementationName(await SharedPreferences.getInstance(), $prefixKey);',
     )

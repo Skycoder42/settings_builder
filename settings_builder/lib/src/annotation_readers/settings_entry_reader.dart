@@ -8,13 +8,29 @@ import '../extensions.dart';
 
 @internal
 class SettingsEntryReader {
+  static late final _defaultValueRegExp = RegExp(
+    r'defaultValue:\s*(.+)(?:,\s*key:|,\s*toSettings:|,\s*fromSettings:|\s*\))',
+  );
+
   final ConstantReader constantReader;
 
   const SettingsEntryReader(this.constantReader);
 
   String? get key => constantReader.maybeReadString('key');
 
-  ConstantReader get defaultValue => constantReader.maybeRead('defaultValue');
+  String? get defaultValue {
+    final source = constantReader.toSource();
+    if (source == null) {
+      return null;
+    }
+
+    final match = _defaultValueRegExp.firstMatch(source);
+    if (match == null) {
+      return null;
+    }
+
+    return match[1];
+  }
 
   ExecutableElement? get toSettings => constantReader.maybeReadFn('toSettings');
 

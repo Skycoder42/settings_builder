@@ -3,6 +3,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:meta/meta.dart';
 import 'package:settings_annotation/settings_annotation.dart';
+import 'package:source_gen/source_gen.dart';
 import 'package:source_helper/source_helper.dart';
 
 import '../../annotation_readers/settings_entry_reader.dart';
@@ -30,7 +31,7 @@ class EntryMemberWriter implements Writer {
   @override
   void call(StringBuffer buffer) {
     final settingsEntry = SettingsEntryReader(
-      getter.getAnnotation<SettingsEntry>(),
+      getter.getAnnotation(const TypeChecker.fromRuntime(SettingsEntry)),
     );
 
     _writeKey(buffer, settingsEntry);

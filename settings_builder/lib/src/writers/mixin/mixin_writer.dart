@@ -3,6 +3,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:meta/meta.dart';
 import 'package:settings_annotation/settings_annotation.dart';
+import 'package:source_gen/source_gen.dart';
 
 import '../../annotation_readers/settings_group_reader.dart';
 import '../../extensions.dart';
@@ -34,7 +35,9 @@ class MixinWriter implements Writer {
     }
 
     for (final getter in clazz.abstractGetters) {
-      if (!getter.returnType.getAnnotation<SettingsGroup>().isNull) {
+      if (!getter.returnType
+          .getAnnotation(const TypeChecker.fromRuntime(SettingsGroup))
+          .isNull) {
         // skip sub groups
         continue;
       }

@@ -6,6 +6,12 @@ import 'package:source_gen/source_gen.dart';
 
 @internal
 extension ConstantReaderX on ConstantReader {
+  static final _expando = Expando<ElementAnnotation>();
+
+  ElementAnnotation? get annotation => _expando[this];
+
+  set annotation(ElementAnnotation? element) => _expando[this] = element;
+
   ConstantReader maybeRead(String name) =>
       isNull ? ConstantReader(null) : read(name);
 
@@ -18,4 +24,6 @@ extension ConstantReaderX on ConstantReader {
     final field = maybeRead(name);
     return field.isNull ? null : field.objectValue.toFunctionValue();
   }
+
+  String? toSource() => annotation?.toSource();
 }

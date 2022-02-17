@@ -9,6 +9,6 @@ import './element_x.dart';
 extension DartTypeX on DartType {
   String get baseTypeName => getDisplayString(withNullability: false);
 
-  ConstantReader getAnnotation<T>() =>
-      element?.getAnnotation<T>() ?? ConstantReader(null);
+  ConstantReader getAnnotation(TypeChecker typeChecker) =>
+      element?.getAnnotation(typeChecker) ?? ConstantReader(null);
 }

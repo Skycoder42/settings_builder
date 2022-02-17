@@ -49,12 +49,8 @@ class EntryGetterWriter implements Writer {
     _writeSpGet(buffer, getter.returnType);
 
     final defaultValue = settingsEntry.defaultValue;
-    if (!defaultValue.isNull) {
-      if (defaultValue.isLiteral) {
-        buffer.write(' ?? ${defaultValue.literalValue}');
-      } else {
-        buffer.write(' ?? ${defaultValue.revive().accessor}');
-      }
+    if (defaultValue != null) {
+      buffer.write(' ?? $defaultValue');
     }
 
     buffer.write(';');
@@ -135,12 +131,10 @@ class EntryGetterWriter implements Writer {
     buffer.write(' : ');
 
     final defaultValue = settingsEntry.defaultValue;
-    if (defaultValue.isNull) {
-      buffer.write(null);
-    } else if (defaultValue.isLiteral) {
-      buffer.write(defaultValue.literalValue);
+    if (defaultValue != null) {
+      buffer.write(defaultValue);
     } else {
-      buffer.write(defaultValue.revive().accessor);
+      buffer.write(null);
     }
 
     buffer
