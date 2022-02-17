@@ -9,6 +9,7 @@ import '../../extensions.dart';
 import '../mixin/mixin_writer.dart';
 import '../writer.dart';
 import 'entry_member_writer.dart';
+import 'group_member_writer.dart';
 
 @internal
 class ImplementationWriter implements Writer {
@@ -18,7 +19,9 @@ class ImplementationWriter implements Writer {
   final ClassElement clazz;
   final SettingsGroupReader settingsGroup;
 
-  String get implementationName => '_\$${clazz.name}Impl';
+  static String getImplementationName(Element clazz) => '_\$${clazz.name}Impl';
+
+  String get implementationName => getImplementationName(clazz);
 
   ImplementationWriter({
     required this.clazz,
@@ -32,11 +35,18 @@ class ImplementationWriter implements Writer {
     _writeCommon(buffer);
 
     for (final getter in clazz.abstractGetters) {
-      if (getter.returnType.hasAnnotation<SettingsGroup>()) {
-      } else {
+      final getterSettingsGroup =
+          getter.returnType.getAnnotation<SettingsGroup>();
+      if (getterSettingsGroup.isNull) {
         EntryMemberWriter(
           getter: getter,
           settingsGroup: settingsGroup,
+        )(buffer);
+      } else {
+        GroupMemberWriter(
+          getter: getter,
+          selfSettingsGroup: settingsGroup,
+          getterSettingsGroup: SettingsGroupReader(getterSettingsGroup),
         )(buffer);
       }
     }
@@ -59,10 +69,25 @@ class ImplementationWriter implements Writer {
   void _writeRootCommon(StringBuffer buffer) => buffer
     ..writeln('@override')
     ..writeln('final String? $prefixKey;')
+    ..writeln()
+    ..writeln('$implementationName(this.$spKey, [this.$prefixKey]);')
+    ..writeln()
+    ..writeln(
+      'static Future<$implementationName> '
+      'getInstance([String? $prefixKey]) async => '
+      '$implementationName(await SharedPreferences.getInstance(), $prefixKey);',
+    )
+    ..writeln()
+    ..writeln('@override')
+    ..writeln('Future<bool> clear() => $spKey.clear();')
     ..writeln();
 
   void _writeGroupCommon(StringBuffer buffer) => buffer
     ..writeln('@override')
     ..writeln('final String ${MixinWriter.groupKeyName};')
+    ..writeln()
+    ..writeln(
+      '$implementationName(this.$spKey, this.${MixinWriter.groupKeyName});',
+    )
     ..writeln();
 }

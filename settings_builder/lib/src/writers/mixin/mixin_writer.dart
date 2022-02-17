@@ -11,7 +11,7 @@ import 'member_writer.dart';
 
 @internal
 class MixinWriter implements Writer {
-  static const groupKeyName = 'groupKey';
+  static const groupKeyName = 'key';
 
   final ClassElement clazz;
   final SettingsGroupReader settingsGroup;
@@ -34,10 +34,8 @@ class MixinWriter implements Writer {
     }
 
     for (final getter in clazz.abstractGetters) {
-      final returnType = getter.returnType;
-
-      if (returnType.hasAnnotation<SettingsGroup>()) {
-        // do not generate set/remove for sub-groups
+      if (!getter.returnType.getAnnotation<SettingsGroup>().isNull) {
+        // skip sub groups
         continue;
       }
 

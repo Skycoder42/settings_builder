@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
+import 'dart:async';
+
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:meta/meta.dart';
@@ -17,6 +19,21 @@ class SettingsGenerator extends GeneratorForAnnotation<SettingsGroup> {
   final BuilderOptions builderOptions;
 
   const SettingsGenerator(this.builderOptions);
+
+  @override
+  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) async {
+    final generatedCode = await super.generate(library, buildStep);
+
+    if (generatedCode.isEmpty) {
+      return generatedCode;
+    }
+
+    final buffer = StringBuffer()
+      ..writeln('// ignore_for_file: avoid_positional_boolean_parameters')
+      ..writeln()
+      ..write(generatedCode);
+    return buffer.toString();
+  }
 
   @override
   String generateForAnnotatedElement(

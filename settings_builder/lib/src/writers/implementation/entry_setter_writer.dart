@@ -40,6 +40,8 @@ class EntrySetterWriter implements Writer {
       _writeToSettings(buffer, toSettings);
     } else if (getter.returnType.isEnum) {
       _writeEnum(buffer);
+    } else if (getter.returnType.isDartCoreNum) {
+      _writeNum(buffer);
     } else {
       _writeDirect(buffer);
     }
@@ -51,6 +53,9 @@ class EntrySetterWriter implements Writer {
 
   void _writeDirect(StringBuffer buffer) =>
       _writeSpSet(buffer, getter.returnType, _valueName);
+
+  void _writeNum(StringBuffer buffer) =>
+      _writeSpSet(buffer, getter.returnType, '$_valueName.toDouble()');
 
   void _writeEnum(StringBuffer buffer) =>
       _writeSpSet(buffer, getter.returnType, '$_valueName.name');
