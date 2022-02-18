@@ -1,0 +1,28 @@
+name: settings_annotation CI/CD
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  ci:
+    name: CI
+    uses: Skycoder42/dart_test_tools/.github/workflows/dart.yml@main
+    with:
+      workingDirectory: packages/settings_annotation
+      unitTestPaths: ""
+      minCoverage: 0
+  cd:
+    name: CD
+    needs:
+      - ci
+    uses: Skycoder42/dart_test_tools/.github/workflows/publish.yml@main
+    with:
+      workingDirectory: packages/settings_annotation
+    secrets:
+      PUB_DEV_CREDENTIALS: ${{ secrets.PUB_DEV_CREDENTIALS }}
