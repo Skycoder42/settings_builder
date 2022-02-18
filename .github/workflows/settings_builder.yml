@@ -5,9 +5,15 @@ on:
   push:
     branches:
       - "*"
+    paths:
+      - "packages/settings_builder/**"
+      - ".github/workflows/settings_builder.yaml"
   pull_request:
     branches:
       - "*"
+    paths:
+      - "packages/settings_builder/**"
+      - ".github/workflows/settings_builder.yaml"
 
 jobs:
   ci:

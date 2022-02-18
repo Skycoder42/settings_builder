@@ -5,9 +5,15 @@ on:
   push:
     branches:
       - "*"
+    paths:
+      - "packages/settings_annotation/**"
+      - ".github/workflows/settings_annotation.yaml"
   pull_request:
     branches:
       - "*"
+    paths:
+      - "packages/settings_annotation/**"
+      - ".github/workflows/settings_annotation.yaml"
 
 jobs:
   ci:
