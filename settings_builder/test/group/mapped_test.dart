@@ -49,7 +49,7 @@ void main() {
       sutValue: (sut) => sut.mapped.decimalValue,
       sutSetValue: (sut, v) => sut.mapped.setDecimalValue(v),
       sutRemoveValue: (sut) => sut.mapped.removeDecimalValue(),
-      testValue: Tuple2(123, 45),
+      testValue: const Tuple2(123, 45),
       mockSpGet: (mock) => mock.getDouble,
       mockSpSet: (mock) => mock.setDouble,
       mockSpValue: 123.45,
@@ -63,7 +63,8 @@ void main() {
       sutValue: (sut) => sut.mapped.uriValue,
       sutSetValue: (sut, v) => sut.mapped.setUriValue(v),
       sutRemoveValue: (sut) => sut.mapped.removeUriValue(),
-      testValue: Uri.https('example.com', '/test/page.html', const {
+      testValue:
+          Uri.https('example.com', '/test/page.html', const <String, String>{
         'a': '1',
         'b': '2',
       }),

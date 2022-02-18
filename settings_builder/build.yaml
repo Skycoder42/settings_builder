@@ -6,3 +6,16 @@ builders:
     auto_apply: dependents
     build_to: cache
     applies_builders: ["source_gen|combining_builder"]
+
+targets:
+  $default:
+    builders:
+      settings_builder:
+        enabled: true
+        generate_for:
+          exclude:
+            - lib
+            - test
+            - example
+          include:
+            - test/models/**
