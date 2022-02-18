@@ -1,9 +1,16 @@
 import 'package:settings_annotation/settings_annotation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tuple/tuple.dart';
+
+import 'test_shared_preferences.dart';
 
 part 'mapped.g.dart';
 
-enum SimpleEnum {
+enum MappedSwitch {
+  on,
+  off,
+}
+
+enum MappedEnum {
   value1,
   value2,
   value3,
@@ -17,17 +24,47 @@ abstract class Mapped with _$Mapped {
   static Future<Mapped> getInstance([String? prefix]) =>
       _$MappedImpl.getInstance(prefix);
 
-  bool? get boolValue;
+  @SettingsEntry(
+    fromSettings: _switchValueFromSettings,
+    toSettings: _switchValueToSettings,
+  )
+  MappedSwitch? get switchValue;
+  static MappedSwitch _switchValueFromSettings(bool v) =>
+      v ? MappedSwitch.on : MappedSwitch.off;
+  static bool _switchValueToSettings(MappedSwitch b) => b == MappedSwitch.on;
 
-  int? get intValue;
+  @SettingsEntry(
+    fromSettings: _mappendEnumValueFromSettings,
+    toSettings: _mappendEnumValueToSettings,
+  )
+  MappedEnum? get mappendEnumValue;
+  static MappedEnum _mappendEnumValueFromSettings(int v) =>
+      MappedEnum.values[v];
+  static int _mappendEnumValueToSettings(MappedEnum e) => e.index;
 
-  double? get doubleValue;
+  @SettingsEntry(
+    fromSettings: _decimalValueFromSettings,
+    toSettings: _decimalValueToSettings,
+  )
+  Tuple2<int, int>? get decimalValue;
+  static Tuple2<int, int> _decimalValueFromSettings(double v) =>
+      Tuple2(v.toInt(), ((v - v.toInt()) * 100).toInt());
+  static double _decimalValueToSettings(Tuple2<int, int> d) =>
+      d.item1 + (d.item2 / 100);
 
-  num? get numValue;
+  @SettingsEntry(
+    fromSettings: _uriValueFromSettings,
+    toSettings: _uriValueToSettings,
+  )
+  Uri? get uriValue;
+  static Uri _uriValueFromSettings(String v) => Uri.parse(v);
+  static String _uriValueToSettings(Uri u) => u.toString();
 
-  String? get stringValue;
-
-  List<String>? get stringListValue;
-
-  SimpleEnum? get enumValue;
+  @SettingsEntry(
+    fromSettings: _wordsValueFromSettings,
+    toSettings: _wordsValueToSettings,
+  )
+  String? get wordsValue;
+  static String _wordsValueFromSettings(List<String> v) => v.join(' ');
+  static List<String> _wordsValueToSettings(String w) => w.split(' ');
 }

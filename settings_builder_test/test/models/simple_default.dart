@@ -1,5 +1,6 @@
 import 'package:settings_annotation/settings_annotation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'test_shared_preferences.dart';
 
 part 'simple_default.g.dart';
 
