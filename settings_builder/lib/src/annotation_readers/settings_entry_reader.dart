@@ -2,6 +2,7 @@
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:meta/meta.dart';
+import 'package:settings_annotation/settings_annotation.dart';
 import 'package:source_gen/source_gen.dart';
 
 import '../extensions.dart';
@@ -19,6 +20,15 @@ class SettingsEntryReader {
   String? get key => constantReader.maybeReadString('key');
 
   String? get defaultValue {
+    // check if it is a DefaultValue
+    final defaultValueReader = constantReader.maybeRead('defaultValue');
+    if (defaultValueReader
+        .instanceOf(const TypeChecker.fromRuntime(LiteralDefault))) {
+      final revived = defaultValueReader.revive();
+      return revived.positionalArguments.first.toStringValue();
+    }
+
+    // Otherwise extract the source code
     final source = constantReader.toSource();
     if (source == null) {
       return null;

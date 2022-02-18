@@ -16,6 +16,23 @@ extension _StringX on String {
   }
 }
 
+@isTest
+void testClear<TSettings extends Object>(
+  String description, {
+  required TSettings Function(SharedPreferences) createSut,
+  required Future<bool> Function(TSettings) sutClear,
+}) =>
+    test(description, () async {
+      final mockSp = MockSharedPreferences();
+      final sut = createSut(mockSp);
+
+      when(() => mockSp.clear()).thenAnswer((i) async => true);
+
+      await expectLater(sutClear(sut), completion(isTrue));
+
+      verify(() => mockSp.clear());
+    });
+
 @isTestGroup
 void testSettingsEntry<TSettings extends Object, TValue extends Object,
         TData extends Object>(

@@ -5,6 +5,12 @@ import 'test_helpers.dart';
 
 void main() {
   group('Simple', () {
+    testClear<Simple>(
+      'clear calls clear on shared preferences',
+      createSut: Simple.new,
+      sutClear: (sut) => sut.clear(),
+    );
+
     testSettingsEntry<Simple, bool, bool>(
       'boolValue',
       createSut: Simple.new,

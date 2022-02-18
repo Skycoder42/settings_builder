@@ -66,5 +66,6 @@ abstract class Mapped with _$Mapped {
   )
   String? get wordsValue;
   static String _wordsValueFromSettings(List<String> v) => v.join(' ');
-  static List<String> _wordsValueToSettings(String w) => w.split(' ');
+  static List<String> _wordsValueToSettings(String w) =>
+      w.isEmpty ? const [] : w.split(' ');
 }
