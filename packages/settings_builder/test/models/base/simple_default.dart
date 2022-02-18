@@ -23,6 +23,7 @@ abstract class SimpleDefaultBase {
   String get stringValue;
 
   @SettingsEntry(
+    // ignore: unnecessary_const
     defaultValue: const ['a', 'b'],
   )
   List<String> get stringListValue;

@@ -14,10 +14,12 @@ enum MappedDefaultEnum {
 
 abstract class MappedDefaultBase {
   @SettingsEntry(
-      fromSettings: switchValueFromSettings,
-      toSettings: switchValueToSettings,
-      defaultValue: MappedDefaultSwitch.off)
+    fromSettings: switchValueFromSettings,
+    toSettings: switchValueToSettings,
+    defaultValue: MappedDefaultSwitch.off,
+  )
   MappedDefaultSwitch get switchValue;
+  // ignore: avoid_positional_boolean_parameters
   static MappedDefaultSwitch switchValueFromSettings(bool v) =>
       v ? MappedDefaultSwitch.on : MappedDefaultSwitch.off;
   static bool switchValueToSettings(MappedDefaultSwitch b) =>

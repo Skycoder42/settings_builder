@@ -16,6 +16,6 @@ targets:
           exclude:
             - lib
             - test
-            - example
           include:
             - test/models/**
+            - example/**

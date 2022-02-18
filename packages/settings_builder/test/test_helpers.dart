@@ -93,8 +93,8 @@ void testSettingsEntry<TSettings extends Object, TValue extends Object,
           });
 
           test(
-              'set${description.pascal}($testValue) sets value in shared preferences to $mockSpValue',
-              () async {
+              'set${description.pascal}($testValue) sets value in '
+              'shared preferences to $mockSpValue', () async {
             when(() => mockSpSet(mockSp)(any(), any()))
                 .thenAnswer((i) async => true);
 
@@ -104,8 +104,8 @@ void testSettingsEntry<TSettings extends Object, TValue extends Object,
           });
 
           test(
-              'remove${description.pascal} removes entry from shared preferences',
-              () async {
+              'remove${description.pascal} removes entry from '
+              'shared preferences', () async {
             when(() => mockSp.remove(any())).thenAnswer((i) async => true);
 
             await expectLater(sutRemoveValue(sut), completion(isTrue));

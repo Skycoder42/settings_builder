@@ -1,4 +1,4 @@
-name: settings_annotation CI/CD
+name: CI/CD for settings_annotation
 
 on:
   workflow_dispatch:

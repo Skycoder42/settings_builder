@@ -18,6 +18,7 @@ abstract class MappedBase {
     toSettings: switchValueToSettings,
   )
   MappedSwitch? get switchValue;
+  // ignore: avoid_positional_boolean_parameters
   static MappedSwitch switchValueFromSettings(bool v) =>
       v ? MappedSwitch.on : MappedSwitch.off;
   static bool switchValueToSettings(MappedSwitch b) => b == MappedSwitch.on;
