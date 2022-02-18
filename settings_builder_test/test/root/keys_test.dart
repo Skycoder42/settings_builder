@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 
-import 'models/keys.dart';
-import 'test_helpers.dart';
+import '../models/root/keys.dart';
+import '../test_helpers.dart';
 
 void main() {
   group('Keys', () {

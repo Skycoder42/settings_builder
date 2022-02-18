@@ -35,7 +35,9 @@ class ImplementationWriter implements Writer {
 
     _writeCommon(buffer);
 
-    for (final getter in clazz.abstractGetters) {
+    for (final getter in clazz.abstractGetters(
+      includeSuperclass: settingsGroup.includeSuperclass,
+    )) {
       final getterSettingsGroup = getter.returnType
           .getAnnotation(const TypeChecker.fromRuntime(SettingsGroup));
       if (getterSettingsGroup.isNull) {

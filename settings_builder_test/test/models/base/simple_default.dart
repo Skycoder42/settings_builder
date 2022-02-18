@@ -1,23 +1,12 @@
 import 'package:settings_annotation/settings_annotation.dart';
 
-import 'test_shared_preferences.dart';
-
-part 'simple_default.g.dart';
-
 enum SimpleDefaultEnum {
   value1,
   value2,
   value3,
 }
 
-@SettingsGroup(root: true)
-abstract class SimpleDefault with _$SimpleDefault {
-  factory SimpleDefault(SharedPreferences sharedPreferences, [String? prefix]) =
-      _$SimpleDefaultImpl;
-
-  static Future<SimpleDefault> getInstance([String? prefix]) =>
-      _$SimpleDefaultImpl.getInstance(prefix);
-
+abstract class SimpleDefaultBase {
   @SettingsEntry(defaultValue: true)
   bool get boolValue;
 

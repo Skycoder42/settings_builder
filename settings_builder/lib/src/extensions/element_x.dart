@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:meta/meta.dart';
 import 'package:source_gen/source_gen.dart';
 import 'constant_reader_x.dart';
@@ -35,7 +36,21 @@ extension ElementX on Element {
 }
 
 @internal
-extension ClassElementX on ClassElement {
+extension InterfaceTypeX on InterfaceType {
   Iterable<PropertyAccessorElement> get abstractGetters =>
-      accessors.where((accessor) => accessor.isGetter && accessor.isAbstract);
+      (superclass?.abstractGetters ?? []).followedBy(
+        accessors.where((accessor) => accessor.isGetter && accessor.isAbstract),
+      );
+}
+
+@internal
+extension ClassElementX on ClassElement {
+  Iterable<PropertyAccessorElement> abstractGetters({
+    required bool includeSuperclass,
+  }) {
+    final superclass = includeSuperclass ? supertype : null;
+    return (superclass?.abstractGetters ?? []).followedBy(
+      accessors.where((accessor) => accessor.isGetter && accessor.isAbstract),
+    );
+  }
 }

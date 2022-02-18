@@ -10,4 +10,7 @@ class SettingsGroupReader {
   const SettingsGroupReader(this.constantReader);
 
   bool get root => constantReader.read('root').boolValue;
+
+  bool get includeSuperclass =>
+      constantReader.read('includeSuperclass').boolValue;
 }

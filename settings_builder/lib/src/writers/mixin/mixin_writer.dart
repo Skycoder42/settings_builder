@@ -34,7 +34,9 @@ class MixinWriter implements Writer {
       _writeGroupCommon(buffer);
     }
 
-    for (final getter in clazz.abstractGetters) {
+    for (final getter in clazz.abstractGetters(
+      includeSuperclass: settingsGroup.includeSuperclass,
+    )) {
       if (!getter.returnType
           .getAnnotation(const TypeChecker.fromRuntime(SettingsGroup))
           .isNull) {

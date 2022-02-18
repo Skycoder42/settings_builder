@@ -1,7 +1,8 @@
 import 'package:test/test.dart';
 
-import 'models/simple.dart';
-import 'test_helpers.dart';
+import '../models/base/simple.dart';
+import '../models/root/simple.dart';
+import '../test_helpers.dart';
 
 void main() {
   group('Simple', () {

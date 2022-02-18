@@ -1,7 +1,8 @@
 import 'package:test/test.dart';
 
-import 'models/simple_default.dart';
-import 'test_helpers.dart';
+import '../models/base/simple_default.dart';
+import '../models/root/simple_default.dart';
+import '../test_helpers.dart';
 
 void main() {
   group('SimpleDefault', () {
