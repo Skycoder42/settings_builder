@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:settings_annotation/settings_annotation.dart';
 import 'package:source_gen/source_gen.dart';
 
-import '../extensions.dart';
+import '../extensions/constant_reader_x.dart';
 
 @internal
 class SettingsEntryReader {

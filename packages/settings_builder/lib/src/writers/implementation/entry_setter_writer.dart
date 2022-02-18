@@ -7,7 +7,7 @@ import 'package:source_gen/source_gen.dart';
 import 'package:source_helper/source_helper.dart';
 
 import '../../annotation_readers/settings_entry_reader.dart';
-import '../../extensions.dart';
+import '../../extensions/dart_type_x.dart';
 import '../writer.dart';
 import 'implementation_writer.dart';
 

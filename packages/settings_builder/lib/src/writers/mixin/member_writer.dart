@@ -4,7 +4,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:meta/meta.dart';
 import 'package:source_helper/source_helper.dart';
 
-import '../../extensions.dart';
+import '../../extensions/dart_type_x.dart';
 import '../writer.dart';
 
 @internal

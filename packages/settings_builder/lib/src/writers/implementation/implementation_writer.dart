@@ -6,7 +6,8 @@ import 'package:settings_annotation/settings_annotation.dart';
 import 'package:source_gen/source_gen.dart';
 
 import '../../annotation_readers/settings_group_reader.dart';
-import '../../extensions.dart';
+import '../../extensions/dart_type_x.dart';
+import '../../extensions/element_x.dart';
 import '../mixin/mixin_writer.dart';
 import '../writer.dart';
 import 'entry_member_writer.dart';

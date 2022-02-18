@@ -8,7 +8,7 @@ import 'package:source_helper/source_helper.dart';
 
 import '../../annotation_readers/settings_entry_reader.dart';
 import '../../annotation_readers/settings_group_reader.dart';
-import '../../extensions.dart';
+import '../../extensions/element_x.dart';
 import '../mixin/mixin_writer.dart';
 import '../writer.dart';
 import 'entry_getter_writer.dart';
