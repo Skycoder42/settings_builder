@@ -6,10 +6,11 @@ import '../test_helpers.dart';
 
 void main() {
   group('Simple', () {
-    testClear<Simple>(
-      'clear calls clear on shared preferences',
+    testRoot<Simple>(
+      'root',
       createSut: Simple.new,
       sutClear: (sut) => sut.clear(),
+      sutReload: (sut) => sut.reload(),
     );
 
     testSettingsEntry<Simple, bool, bool>(

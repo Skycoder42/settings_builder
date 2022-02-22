@@ -5,10 +5,11 @@ import '../test_helpers.dart';
 
 void main() {
   group('KeysGroup', () {
-    testClear<Keys>(
-      'clear calls clear on shared preferences',
+    testRoot<Keys>(
+      'root',
       createSut: Keys.new,
       sutClear: (sut) => sut.clear(),
+      sutReload: (sut) => sut.reload(),
     );
 
     testSettingsEntry<Keys, int, int>(

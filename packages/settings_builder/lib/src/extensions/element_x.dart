@@ -2,6 +2,7 @@
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:code_builder/code_builder.dart';
 import 'package:meta/meta.dart';
 import 'package:source_gen/source_gen.dart';
 import 'constant_reader_x.dart';
@@ -38,9 +39,14 @@ extension ElementX on Element {
 @internal
 extension InterfaceTypeX on InterfaceType {
   Iterable<PropertyAccessorElement> get abstractGetters =>
-      (superclass?.abstractGetters ?? []).followedBy(
+      (superclass?.abstractGetters ?? const []).followedBy(
         accessors.where((accessor) => accessor.isGetter && accessor.isAbstract),
       );
+}
+
+@internal
+extension TypeDefiningElementX on TypeDefiningElement {
+  TypeReference get typeReference => TypeReference((b) => b.symbol = name);
 }
 
 @internal
@@ -49,8 +55,20 @@ extension ClassElementX on ClassElement {
     required bool includeSuperclass,
   }) {
     final superclass = includeSuperclass ? supertype : null;
-    return (superclass?.abstractGetters ?? []).followedBy(
+    return (superclass?.abstractGetters ?? const []).followedBy(
       accessors.where((accessor) => accessor.isGetter && accessor.isAbstract),
     );
+  }
+}
+
+@internal
+extension ExecutableElementX on ExecutableElement {
+  Expression get funcExpr {
+    final self = this;
+    if (self is MethodElement) {
+      return Reference(self.enclosingElement.name).property(name);
+    } else {
+      return Reference(name);
+    }
   }
 }

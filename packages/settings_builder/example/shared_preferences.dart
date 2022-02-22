@@ -10,6 +10,8 @@ class SharedPreferences {
     return true;
   }
 
+  Future<void> reload() => Future.value(null);
+
   bool containsKey(String key) => values.containsKey(key);
 
   bool? getBool(String key) => values[key] as bool?;

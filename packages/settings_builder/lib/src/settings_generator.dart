@@ -4,13 +4,14 @@ import 'dart:async';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
+import 'package:code_builder/code_builder.dart';
 import 'package:meta/meta.dart';
 import 'package:settings_annotation/settings_annotation.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'annotation_readers/settings_group_reader.dart';
-import 'writers/implementation/implementation_writer.dart';
-import 'writers/mixin/mixin_writer.dart';
+import 'generators/implementation/implementation_generator.dart';
+import 'generators/mixin/mixin_generator.dart';
 
 @internal
 class SettingsGenerator extends GeneratorForAnnotation<SettingsGroup> {
@@ -56,18 +57,23 @@ class SettingsGenerator extends GeneratorForAnnotation<SettingsGroup> {
     }
 
     final settingsGroup = SettingsGroupReader(annotation);
-    final mixinWriter = MixinWriter(
+    final mixinGenerator = MixinGenerator(
       clazz: element,
       settingsGroup: settingsGroup,
     );
-    final implementationWriter = ImplementationWriter(
+    final implementationGenerator = ImplementationGenerator(
       clazz: element,
       settingsGroup: settingsGroup,
     );
 
+    final emitter = DartEmitter(
+      orderDirectives: true,
+      useNullSafetySyntax: true,
+    );
+
     final buffer = StringBuffer();
-    mixinWriter(buffer);
-    implementationWriter(buffer);
+    mixinGenerator.build().accept(emitter, buffer);
+    implementationGenerator.build().accept(emitter, buffer);
     return buffer.toString();
   }
 }

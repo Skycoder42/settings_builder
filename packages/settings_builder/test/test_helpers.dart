@@ -17,20 +17,34 @@ extension _StringX on String {
 }
 
 @isTest
-void testClear<TSettings extends Object>(
+void testRoot<TSettings extends Object>(
   String description, {
   required TSettings Function(SharedPreferences) createSut,
   required Future<bool> Function(TSettings) sutClear,
+  required Future<void> Function(TSettings) sutReload,
 }) =>
-    test(description, () async {
-      final mockSp = MockSharedPreferences();
-      final sut = createSut(mockSp);
+    group(description, () {
+      test('clear should call SharedPreferences.clear', () async {
+        final mockSp = MockSharedPreferences();
+        final sut = createSut(mockSp);
 
-      when(() => mockSp.clear()).thenAnswer((i) async => true);
+        when(() => mockSp.clear()).thenAnswer((i) async => true);
 
-      await expectLater(sutClear(sut), completion(isTrue));
+        await expectLater(sutClear(sut), completion(isTrue));
 
-      verify(() => mockSp.clear());
+        verify(() => mockSp.clear());
+      });
+
+      test('reload should call SharedPreferences.reload', () async {
+        final mockSp = MockSharedPreferences();
+        final sut = createSut(mockSp);
+
+        when(() => mockSp.reload()).thenAnswer((i) async {});
+
+        await expectLater(sutReload(sut), completes);
+
+        verify(() => mockSp.reload());
+      });
     });
 
 @isTestGroup

@@ -5,10 +5,11 @@ import '../test_helpers.dart';
 
 void main() {
   group('Nested', () {
-    testClear<Nested>(
-      'clear calls clear on shared preferences',
+    testRoot<Nested>(
+      'root',
       createSut: Nested.new,
       sutClear: (sut) => sut.clear(),
+      sutReload: (sut) => sut.reload(),
     );
 
     testSettingsEntry<Nested, int, int>(

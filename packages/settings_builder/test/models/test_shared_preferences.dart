@@ -3,6 +3,8 @@ abstract class SharedPreferences {
 
   Future<bool> clear();
 
+  Future<void> reload();
+
   bool containsKey(String key);
 
   bool? getBool(String key);

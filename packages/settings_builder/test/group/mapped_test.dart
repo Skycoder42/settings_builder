@@ -7,10 +7,11 @@ import '../test_helpers.dart';
 
 void main() {
   group('MappedGroup', () {
-    testClear<Mapped>(
-      'clear calls clear on shared preferences',
+    testRoot<Mapped>(
+      'root',
       createSut: Mapped.new,
       sutClear: (sut) => sut.clear(),
+      sutReload: (sut) => sut.reload(),
     );
 
     testSettingsEntry<Mapped, MappedSwitch, bool>(
