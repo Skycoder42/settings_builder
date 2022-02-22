@@ -20,7 +20,7 @@ A dart builder that generates automatic accessors for reading and writing shared
 - Built-In support for all types compatible with `SharedPreferences`
   - Allow definition of default values
   - Supports any type via custom converters.
-- Hierachical structuring
+- Hierarchical structuring
 
 ## Installation
 As this is a builder package, you need to also install the annotations and build_runner:

@@ -1,6 +1,6 @@
 name: settings_builder
 description: A dart builder that generates automatic accessors for reading and writing shared preferences.
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/Skycoder42/settings_builder/tree/main/packages/settings_builder
 
 environment:
