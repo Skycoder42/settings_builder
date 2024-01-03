@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:meta/meta.dart';
