@@ -10,7 +10,7 @@ A dart builder that generates automatic accessors for reading and writing shared
 - [Usage](#usage)
 - [Documentation](#documentation)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+<small><i><a href='https://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## Features
 - Generates compile time safe access to `SharedPreferences`.
