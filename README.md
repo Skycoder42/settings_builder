@@ -1,8 +1,8 @@
 # settings_builder
-[![CI/CD for settings_annotation](https://github.com/Skycoder42/settings_builder/actions/workflows/settings_annotation.yml/badge.svg)](https://github.com/Skycoder42/settings_builder/actions/workflows/settings_annotation.yml)
+[![CI/CD for settings_annotation](https://github.com/Skycoder42/settings_builder/actions/workflows/settings_annotation_ci.yaml/badge.svg)](https://github.com/Skycoder42/settings_builder/actions/workflows/settings_annotation_ci.yaml)
 [![settings_annotation Pub Version](https://img.shields.io/pub/v/settings_annotation)](https://pub.dev/packages/settings_annotation)
 
-[![CI/CD for settings_builder](https://github.com/Skycoder42/settings_builder/actions/workflows/settings_builder.yml/badge.svg)](https://github.com/Skycoder42/settings_builder/actions/workflows/settings_builder.yml)
+[![CI/CD for settings_builder](https://github.com/Skycoder42/settings_builder/actions/workflows/settings_builder_ci.yaml/badge.svg)](https://github.com/Skycoder42/settings_builder/actions/workflows/settings_builder_ci.yaml)
 [![settings_builder Pub Version](https://img.shields.io/pub/v/settings_builder)](https://pub.dev/packages/settings_builder)
 
 This repository is a multi package repository for the settings_builder. It consists of the following packages. Please
