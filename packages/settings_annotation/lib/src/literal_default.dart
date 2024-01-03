@@ -1,3 +1,5 @@
+import 'settings_entry.dart';
+
 /// A helper class to construct default values that are not const
 ///
 /// This value can be used with [SettingsEntry.defaultValue] to provide a value

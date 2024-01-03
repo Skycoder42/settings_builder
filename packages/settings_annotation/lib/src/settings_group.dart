@@ -52,7 +52,7 @@ class SettingsGroup {
   ///
   /// Root groups can be constructed and serve as top level class to access
   /// settings. Non root groups can be used as children within other groups to
-  /// create a hierachical structure of settings.
+  /// create a hierarchical structure of settings.
   final bool root;
 
   /// Specifies, if the generator should include abstract getters of
@@ -61,7 +61,7 @@ class SettingsGroup {
   /// *Default value:* `false`
   ///
   /// By default, only abstract getters of the specific type that the
-  /// annotiation was placed on are generated. However, in case you want to
+  /// annotation was placed on are generated. However, in case you want to
   /// reuse certain definitions, you can set this to `true`. Then, the generator
   /// will recursively check superclasses to abstract getters to also implement.
   final bool includeSuperclass;

@@ -1,0 +1,18 @@
+name: CD - Publish settings_annotation to pub.dev
+
+on:
+  push:
+    tags:
+      - "settings_annotation-v*"
+
+jobs:
+  publish:
+    name: Publish
+    uses: Skycoder42/dart_test_tools/.github/workflows/publish.yml@main
+    permissions:
+      id-token: write
+    with:
+      environment: pub-deploy
+      tagPrefix: settings_annotation-v
+      workingDirectory: packages/settings_annotation
+      buildRunner: false

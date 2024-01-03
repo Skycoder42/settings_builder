@@ -1,5 +1,8 @@
 import 'package:meta/meta_meta.dart';
 
+import 'literal_default.dart';
+import 'settings_group.dart';
+
 /// Allow you to defined additional properties on an abstract getter of a
 /// [SettingsGroup].
 ///
@@ -36,7 +39,7 @@ class SettingsEntry {
   /// Must always have the signature `TSettings Function(TValue)`. Additional
   /// optional parameters are allowed, but will not be used by the generated
   /// settings. `TSettings` must be a settings compatible type. Those are listed
-  /// below. `TValue` must be the same type as the return type of the gettern,
+  /// below. `TValue` must be the same type as the return type of the getter,
   /// but should non nullable even if the return type is nullable. In addition,
   /// the function must either be a top level function or a static member
   /// function.
@@ -47,8 +50,8 @@ class SettingsEntry {
   /// - [double]
   /// - [num]
   /// - [String]
-  /// - [List]<String>
-  /// - a dart [enum]
+  /// - [List<String>]
+  /// - a dart [Enum]
   final Function? toSettings;
 
   /// A custom converter to transform a settings compatible value to a value
@@ -57,7 +60,7 @@ class SettingsEntry {
   /// Must always have the signature `TValue Function(TSettings)`. Additional
   /// optional parameters are allowed, but will not be used by the generated
   /// settings. `TSettings` must be a settings compatible type. Those are listed
-  /// below. `TValue` must be the same type as the return type of the gettern,
+  /// below. `TValue` must be the same type as the return type of the getter,
   /// but should non nullable even if the return type is nullable. In addition,
   /// the function must either be a top level function or a static member
   /// function. It will only be called if a valid value is read from the
@@ -69,8 +72,8 @@ class SettingsEntry {
   /// - [double]
   /// - [num]
   /// - [String]
-  /// - [List]<String>
-  /// - a dart [enum]
+  /// - [List<String>]
+  /// - a dart [Enum]
   final Function? fromSettings;
 
   /// Default constructor.
