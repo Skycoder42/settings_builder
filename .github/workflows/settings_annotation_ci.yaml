@@ -16,6 +16,7 @@ jobs:
       buildRunner: false
       unitTestPaths: ""
       minCoverage: 0
+      panaScoreThreshold: 10
   cd:
     name: CD
     needs:

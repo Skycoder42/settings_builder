@@ -1,5 +1,5 @@
 name: settings_annotation
-description: Annotations for the settings_builder package.
+description: Build annotations for the settings_builder package to generate automatic accessors for reading and writing shared preferences.
 version: 1.0.1
 homepage: https://github.com/Skycoder42/settings_builder/tree/main/packages/settings_annotation
 
