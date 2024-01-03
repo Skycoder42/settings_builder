@@ -9,7 +9,7 @@ import '../extensions/constant_reader_x.dart';
 
 @internal
 class SettingsEntryReader {
-  static late final _defaultValueRegExp = RegExp(
+  static final _defaultValueRegExp = RegExp(
     r'defaultValue:\s*(.+)(?:,\s*key:|,\s*toSettings:|,\s*fromSettings:|\s*\))',
   );
 

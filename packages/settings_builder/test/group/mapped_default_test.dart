@@ -1,5 +1,6 @@
+// ignore_for_file: discarded_futures
+
 import 'package:test/test.dart';
-import 'package:tuple/tuple.dart';
 
 import '../models/base/mapped_default_base.dart';
 import '../models/group/mapped_default.dart';
@@ -44,7 +45,7 @@ void main() {
       mockSpValue: 1,
     );
 
-    testSettingsEntry<MappedDefault, Tuple2<int, int>, double>(
+    testSettingsEntry<MappedDefault, (int, int), double>(
       'mapped.decimalValue',
       createSut: MappedDefault.new,
       sutValueKey: (sut) => sut.mapped.decimalValueKey,
@@ -52,8 +53,8 @@ void main() {
       sutValue: (sut) => sut.mapped.decimalValue,
       sutSetValue: (sut, v) => sut.mapped.setDecimalValue(v),
       sutRemoveValue: (sut) => sut.mapped.removeDecimalValue(),
-      testValue: const Tuple2(123, 45),
-      defaultValue: const Tuple2(0, 0),
+      testValue: const (123, 45),
+      defaultValue: const (0, 0),
       mockSpGet: (mock) => mock.getDouble,
       mockSpSet: (mock) => mock.setDouble,
       mockSpValue: 123.45,

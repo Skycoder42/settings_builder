@@ -9,7 +9,6 @@ import 'package:source_helper/source_helper.dart';
 
 import '../../annotation_readers/settings_entry_reader.dart';
 import '../../annotations.dart';
-import '../../extensions/dart_type_x.dart';
 import '../../extensions/element_x.dart';
 import '../../signatures.dart';
 import '../../types.dart';
@@ -35,11 +34,7 @@ class EntrySetterGenerator {
               Parameter(
                 (b) => b
                   ..name = _value
-                  ..type = TypeReference(
-                    (b) => b
-                      ..replace(getter.returnType.typeReference)
-                      ..isNullable = false,
-                  ),
+                  ..type = Types.fromDartType(getter.returnType, isNull: false),
               ),
             )
             ..returns = Types.futureBool

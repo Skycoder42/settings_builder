@@ -1,3 +1,5 @@
+// ignore_for_file: discarded_futures
+
 import 'package:test/test.dart';
 
 import '../models/base/simple_default.dart';

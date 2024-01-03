@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:source_helper/source_helper.dart';
 
 @internal
-abstract class Signatures {
+abstract base class Signatures {
   Signatures._();
 
   static const groupKey = 'key';

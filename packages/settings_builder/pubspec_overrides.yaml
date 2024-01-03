@@ -1,0 +1,3 @@
+dependency_overrides:
+  settings_annotation:
+    path: ../settings_annotation

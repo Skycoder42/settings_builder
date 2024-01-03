@@ -4,7 +4,6 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:meta/meta.dart';
 
-import '../../extensions/dart_type_x.dart';
 import '../../signatures.dart';
 import '../../types.dart';
 
@@ -37,11 +36,7 @@ class MemberGenerator {
             Parameter(
               (b) => b
                 ..name = 'value'
-                ..type = TypeReference(
-                  (b) => b
-                    ..replace(getter.returnType.typeReference)
-                    ..isNullable = false,
-                ),
+                ..type = Types.fromDartType(getter.returnType, isNull: false),
             ),
           )
           ..returns = Types.futureBool,
@@ -50,7 +45,7 @@ class MemberGenerator {
         (b) => b
           ..name = Signatures.removeEntry(getter)
           ..returns = Types.futureBool,
-      )
+      ),
     ]);
   }
 }

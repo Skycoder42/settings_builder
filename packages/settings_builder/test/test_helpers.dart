@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_lambdas
+
 import 'package:meta/meta.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';

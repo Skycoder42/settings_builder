@@ -1,5 +1,4 @@
 import 'package:settings_annotation/settings_annotation.dart';
-import 'package:tuple/tuple.dart';
 
 enum MappedSwitch {
   on,
@@ -35,11 +34,11 @@ abstract class MappedBase {
     fromSettings: decimalValueFromSettings,
     toSettings: decimalValueToSettings,
   )
-  Tuple2<int, int>? get decimalValue;
-  static Tuple2<int, int> decimalValueFromSettings(double v) =>
-      Tuple2(v.toInt(), ((v - v.toInt()) * 100).toInt());
-  static double decimalValueToSettings(Tuple2<int, int> d) =>
-      d.item1 + (d.item2 / 100);
+  (int, int)? get decimalValue;
+  static (int, int) decimalValueFromSettings(double v) =>
+      (v.toInt(), ((v - v.toInt()) * 100).toInt());
+
+  static double decimalValueToSettings((int, int) d) => d.$1 + (d.$2 / 100);
 
   @SettingsEntry(
     fromSettings: uriValueFromSettings,

@@ -9,9 +9,9 @@ import 'package:source_helper/source_helper.dart';
 
 import '../../annotation_readers/settings_entry_reader.dart';
 import '../../annotations.dart';
-import '../../extensions/dart_type_x.dart';
 import '../../extensions/element_x.dart';
 import '../../signatures.dart';
+import '../../types.dart';
 
 @internal
 class EntryGetterGenerator {
@@ -31,7 +31,7 @@ class EntryGetterGenerator {
           b
             ..type = MethodType.getter
             ..name = Signatures.getEntry(getter)
-            ..returns = getter.returnType.typeReference
+            ..returns = Types.fromDartType(getter.returnType)
             ..annotations.add(Annotations.override);
 
           final fromSettings = settingsEntry.fromSettings;
@@ -62,7 +62,7 @@ class EntryGetterGenerator {
     _buildWrapped(
       b,
       getter.returnType,
-      getter.returnType.typeReference
+      Types.fromDartType(getter.returnType, isNull: false)
           .property('values')
           .property('byName')
           .call(const [_valueRef]),
@@ -121,7 +121,7 @@ class EntryGetterGenerator {
     final defaultValue = settingsEntry.defaultValue;
     b.body = Block(
       (b) => b
-        ..addExpression(_spGet(spType).assignFinal(_value))
+        ..addExpression(declareFinal(_value).assign(_spGet(spType)))
         ..addExpression(
           _valueRef
               .notEqualTo(literalNull)

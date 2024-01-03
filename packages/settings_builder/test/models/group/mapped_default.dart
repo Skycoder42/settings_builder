@@ -1,5 +1,4 @@
 import 'package:settings_annotation/settings_annotation.dart';
-import 'package:tuple/tuple.dart';
 
 import '../base/mapped_default_base.dart';
 import '../test_shared_preferences.dart';

@@ -1,0 +1,25 @@
+name: CD - Publish settings_builder to pub.dev
+
+on:
+  push:
+    tags:
+      - "settings_builder-v*"
+
+jobs:
+  ci:
+    name: CI (pub.dev)
+    uses: Skycoder42/dart_test_tools/.github/workflows/dart.yml@main
+    with:
+      workingDirectory: packages/settings_builder
+      buildRunner: true
+      minCoverage: 0
+  publish:
+    name: Publish
+    uses: Skycoder42/dart_test_tools/.github/workflows/publish.yml@main
+    permissions:
+      id-token: write
+    with:
+      environment: pub-deploy
+      tagPrefix: settings_builder-v
+      workingDirectory: packages/settings_builder
+      buildRunner: true
